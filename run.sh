@@ -1,7 +1,10 @@
 #!/bin/sh
-if [ $# -ne 2 ]; then
-    echo "Must include day and part to run"
+if [ $# -eq 1 ]; then
+    docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/a.php
+    docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/b.php
     exit 1
 fi
-#docker run --rm -v $(pwd):/app composer/composer install
-docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/$2.php
+if [ $# -eq 2 ]; then
+    docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/$2.php
+    exit 1
+fi

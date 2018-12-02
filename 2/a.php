@@ -14,4 +14,4 @@ while (!$file->eof() && !empty($file->current())) {
   }
   $file->next();
 }
-echo count($twos) * count($threes);
+echo count($twos) * count($threes)."\n";
