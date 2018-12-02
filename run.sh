@@ -1,10 +1,9 @@
-#!/bin/sh
-if [ $# -eq 1 ]; then
-    docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/a.php
-    docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/b.php
-    exit 1
+#!/bin/bash
+IMAGE=greboid/aoc-2018
+docker image inspect $IMAGE >/dev/null 2>&1
+if [ $? -ne 0 ]
+then
+    echo "One time setup: building docker image..."
+    docker build . -t $IMAGE
 fi
-if [ $# -eq 2 ]; then
-    docker run --rm -it -v $PWD:/app -w /app php:7.3-rc-cli php $1/$2.php
-    exit 1
-fi
+docker run --rm -it -v $(pwd):/app $IMAGE $@
