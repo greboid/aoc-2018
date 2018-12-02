@@ -7,7 +7,6 @@ if [ $# -ge 1 ]; then
 fi
 if [ $# -eq 1 ]; then
   time sh -c "php $1/a.php; php $1/b.php"
-  exit 1
 elif [ $# -eq 2 ]; then
   if [ -f "/app/$1/$2.php" ]; then
     time php $1/$2.php
