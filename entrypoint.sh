@@ -18,5 +18,3 @@ elif [ $# -eq 2 ]; then
 else
   echo "You must specify at least the day"
 fi
-
-exec "$@"
