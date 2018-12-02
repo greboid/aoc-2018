@@ -14,7 +14,6 @@ elif [ $# -eq 2 ]; then
   else
     echo "Invalid part"
   fi
-  exit 1
 else
   echo "You must specify at least the day"
 fi
