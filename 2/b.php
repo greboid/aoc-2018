@@ -1,21 +1,12 @@
 <?php
-$file = file(__DIR__."/input.txt");
-$commons = array();
+$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
+$results=array();
 foreach ($file as $a) {
   foreach ($file as $b) {
-    $common = array_diff(str_split($a), str_split($b));
-    if (count($common) == 1) {
-      foreach ($common as $key => $value) {
-        if (array_key_exists($key, $commons)) {
-         echo 'A: '.$a;
-         echo 'B: '.$b;
-         echo implode(array_intersect(str_split($a), str_split($b)));
-         echo implode('',array_unique(array_intersect(str_split($a), str_split($b))));
-         break 3;
-        } else {
-          $commons[$key] = $value;
-        }
-      }
+    $diff = levenshtein($a, $b);
+    if ($diff ==1) {
+      $results[] = implode(array_intersect_assoc(str_split($a), str_split($b)))."\r\n";
     }
   }
 }
+echo array_unique($results)[0];
