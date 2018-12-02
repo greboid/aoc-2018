@@ -1,5 +1,5 @@
 #!/bin/bash
-IMAGE=greboid/aoc-2018-01
+IMAGE=greboid/aoc-2018-02
 if [ "$(docker images -q $IMAGE)" == "" ]
 then
     docker build . -t $IMAGE
