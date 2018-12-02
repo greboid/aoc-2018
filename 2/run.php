@@ -14,4 +14,16 @@ while (!$file->eof() && !empty($file->current())) {
   }
   $file->next();
 }
-echo count($twos) * count($threes)."\n";
+echo "Part 1: " .count($twos) * count($threes)."\n";
+
+$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
+$results=array();
+foreach ($file as $a) {
+  foreach ($file as $b) {
+    $diff = levenshtein($a, $b);
+    if ($diff ==1) {
+      echo "Part 2: " .implode(array_intersect_assoc(str_split($a), str_split($b)))."\n";
+      break 2;
+    }
+  }
+}
