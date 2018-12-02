@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if [ $# -ge 1 ]; then
   if [ ! -d "/app/$1" ]; then
     echo "Invalid Day"
