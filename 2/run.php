@@ -14,7 +14,6 @@ foreach ($file as $line) {
   }
 }
 echo "Part 1: " .count($twos) * count($threes)."\n";
-$results=array();
 foreach ($file as $a) {
   foreach ($file as $b) {
     $diff = levenshtein($a, $b);
