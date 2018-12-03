@@ -1,22 +1,19 @@
 <?php
-$file = new SplFileObject(__DIR__."/input.txt");
 $twos = array();
 $threes = array();
-while (!$file->eof() && !empty($file->current())) {
-  $counts = array_count_values(str_split($file->current()));
+$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
+foreach ($file as $line) {
+  $counts = array_count_Values(str_split($line));
   foreach ($counts as $letter => $count) {
     if ($count == 2) {
-      $twos[$file->current()] = 1;
+      $twos[$line] = 1;
     }
     if ($count == 3) {
-      $threes[$file->current()] = 1;
+      $threes[$line] = 1;
     }
   }
-  $file->next();
 }
 echo "Part 1: " .count($twos) * count($threes)."\n";
-
-$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
 $results=array();
 foreach ($file as $a) {
   foreach ($file as $b) {
