@@ -1,5 +1,5 @@
-#Advent of code 2018
+# Advent of code 2018
 
 Needs docker installed.
 
-run.sh day [part]
+run.sh [--answers] day
