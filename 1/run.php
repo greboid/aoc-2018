@@ -1,5 +1,5 @@
 <?php
-$lines = file(__DIR__."/input.txt");
+$lines = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
 $found = false;
 $value = 0;
 $seen = array();
