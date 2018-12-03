@@ -1,7 +1,7 @@
 <?php
 $twos = array();
 $threes = array();
-$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
+$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 foreach ($file as $line) {
   $counts = array_count_Values(str_split($line));
   foreach ($counts as $letter => $count) {

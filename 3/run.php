@@ -1,6 +1,6 @@
 <?php
 ini_set('memory_limit', '200M');
-$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES);
+$file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 $matches = array();
 $claims = array();
