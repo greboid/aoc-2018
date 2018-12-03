@@ -8,7 +8,7 @@ while (!$found) {
   foreach ($lines as $line) {
     $value += intval($line);
     $found = array_key_exists(strval($value), $seen);
-    if ($found) { echo "Part 2: " .$value ." (iterations: ".$iteration.")\r\n"; break 2; }
+    if ($found) { echo "Part 2: " .$value ."\n"; break 2; }
     $seen[strval($value)] = 1;
   }
   $iteration++;
