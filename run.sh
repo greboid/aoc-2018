@@ -3,4 +3,4 @@ IMAGE=greboid/aoc-2018-06
 if [ "$(docker images -q $IMAGE)" == "" ]; then
     docker build . -t $IMAGE
 fi
-docker run --rm -it -v $(pwd):/app $IMAGE $@
+docker run --rm -v $(pwd):/app $IMAGE $@
