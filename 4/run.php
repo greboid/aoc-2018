@@ -39,16 +39,12 @@ foreach ($actions as $action) {
         $sleepminutes[$guard][$i] = 0;
       }
       $sleepminutes[$guard][$i]++;
-      if (!isset($sleepfrequency[$guard][$i])) {
-        $sleepfrequency[$guard][$i] = 0;
-      }
-      $sleepfrequency[$guard][$i]++;
-      if ($sleepfrequency[$guard][$i] > $mostsleepminute) {
-        $mostsleepminute=$sleepfrequency[$guard][$i];
+      if ($sleepminutes[$guard][$i] > $mostsleepminute) {
+        $mostsleepminute=$sleepminutes[$guard][$i];
         $sleepiestminute = [$guard,$mostsleepminute, $action['minute']];
       }
     }
   }
 }
 echo 'Part 1: '.(array_keys($sleepminutes[$sleepiest[0]], max($sleepminutes[$sleepiest[0]]))[0] * $sleepiest[0])."\n";
-echo 'Part 2: '.array_search(max($sleepfrequency[$sleepiestminute[0]]), $sleepfrequency[$sleepiestminute[0]]) * $sleepiestminute[0]."\n";
+echo 'Part 2: '.array_search(max($sleepminutes[$sleepiestminute[0]]), $sleepminutes[$sleepiestminute[0]]) * $sleepiestminute[0]."\n";
