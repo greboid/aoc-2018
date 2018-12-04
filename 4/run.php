@@ -3,11 +3,6 @@
 $file = file(__DIR__."/input.txt",FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 sort($file);
 $actions = array();
-foreach ($file as $line) {
-  #[1518-03-13 23:56] Guard #2539 begins shift
-  preg_match("/\[[0-9]+-[0-9]+-[0-9]+ [0-9]+:([0-9]+)\] (.*)/",$line,$matches);
-  $actions[] = ['minute'=>$matches[1], 'action'=>$matches[2]];
-}
 $guard = 0;
 $sleepcount = array();
 $sleep = 0;
@@ -17,7 +12,10 @@ $sleepiest = [0,0,0];
 $sleepiestminute = [0,0,0];
 $sleepminutes = array();
 $sleepfrequency = array();
-foreach ($actions as $action) {
+foreach ($file as $line) {
+  #[1518-03-13 23:56] Guard #2539 begins shift
+  preg_match("/\[[0-9]+-[0-9]+-[0-9]+ [0-9]+:([0-9]+)\] (.*)/",$line,$matches);
+  $action = ['minute'=>$matches[1], 'action'=>$matches[2]];
   if (preg_match('/.*#([0-9]+).*/', $action['action'], $matches)) {
     $guard = $matches[1];
     if (!isset($sleepcount[$guard])) {
