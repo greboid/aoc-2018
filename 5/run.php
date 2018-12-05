@@ -18,11 +18,12 @@ function react($input) {
   return $input;
 }
 
-echo 'Part 1: '.strlen(react($file))."\n";;
+$result = react($file);
+echo 'Part 1: '.strlen($result)."\n";;
 
 $lengths = array();
 for($i = 65; $i < 91; $i++) {
-  $input = $file;
+  $input = $result;
   $test = str_replace([chr($i),chr($i+32)], '', $input);
   $lengths[chr($i)] = strlen(react($test));
 }
