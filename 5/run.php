@@ -25,3 +25,12 @@ function fullyReact(&$input) {
 }
 
 echo 'Part 1: '.strlen(fullyReact($file))."\n";
+
+$lengths = array();
+for($i = 65; $i < 91; $i++) {
+  $input = $file;
+  $test = str_replace(chr($i), '', $input);
+  $test = str_replace(chr($i+32), '', $test);
+  $lengths[chr($i)] = strlen(fullyReact($test));
+}
+echo 'Part 2: '.min($lengths);
