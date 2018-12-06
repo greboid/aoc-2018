@@ -4,23 +4,20 @@ import kotlin.streams.toList
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>) {
-    val num = measureTimeMillis {
+    val num = run {
         val lineList = File("input.txt").useLines { lines -> lines.map { s -> s.toInt() }.asStream().toList() }
-        println(lineList.sum())
+        println("Part 1: ${lineList.sum()}")
         val seen = mutableSetOf<Int>()
         var sum = 0
         while (true) {
             lineList.forEach { line ->
-                run {
                     sum += line
                     if (sum in seen) {
-                        println(sum)
-                        return@measureTimeMillis
+                        return@run sum
                     }
                     seen.add(sum)
-                }
             }
         }
     }
-    println(num)
+    println("Part 2: $num")
 }
