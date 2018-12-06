@@ -14,7 +14,13 @@ if [ $# -eq 1 ]; then
   if [ $ANSWERS -eq 1 ]; then
     cat $1/answers.txt
   else
-    time php $1/run.php
+    if [ -f $1/build.gradle ]; then
+      cd $1
+      gradle --project-cache-dir=/tmp/.gradle -g /tmp/.gradle --no-daemon jar
+      time java -jar /tmp/build/libs/app.jar
+    else
+      time php $1/run.php
+    fi
   fi
 else
   echo "You must specify the day"
