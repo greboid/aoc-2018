@@ -18,7 +18,7 @@ if [ $# -eq 1 ]; then
       if [ -w /app ]; then
         cd $1
         gradle --project-cache-dir=/app/.build/$1 -g /app/.build/$1 --no-daemon jar -q > /dev/null 2>&1
-        time java -jar /tmp/build/libs/app.jar
+        time java -jar /app/.build/$1/libs/app.jar
       else
         cd $1
         gradle --project-cache-dir=/tmp/.gradle -g /tmp/.gradle --no-daemon jar -q > /dev/null 2>&1

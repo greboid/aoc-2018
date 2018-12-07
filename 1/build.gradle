@@ -35,5 +35,5 @@ jar {
     archiveName 'app.jar'
 }
 allprojects {
-    buildDir = "/tmp/build/"
+    buildDir = project.gradle.gradleUserHomeDir
 }
