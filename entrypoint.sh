@@ -16,7 +16,11 @@ if [ $# -eq 1 ]; then
   else
     if [ -f $1/build.gradle ]; then
       cd $1
-      gradle --project-cache-dir=/tmp/.gradle -g /tmp/.gradle --no-daemon jar -q > /dev/null 2>&1
+      if [ -w $1 ]; then
+        gradle --no-daemon jar -q > /dev/null 2>&1
+      else
+        gradle --project-cache-dir=/tmp/.gradle -g /tmp/.gradle --no-daemon jar -q > /dev/null 2>&1
+      fi
       time java -jar /tmp/build/libs/app.jar
     else
       time php $1/run.php
