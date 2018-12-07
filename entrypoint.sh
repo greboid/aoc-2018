@@ -15,13 +15,15 @@ if [ $# -eq 1 ]; then
     cat $1/answers.txt
   else
     if [ -f $1/build.gradle ]; then
-      cd $1
-      if [ -w $1 ]; then
-        gradle --no-daemon jar -q > /dev/null 2>&1
+      if [ -w /app ]; then
+        cd $1
+        gradle --project-cache-dir=/app/$1 -g /app/$1 --no-daemon jar -q > /dev/null 2>&1
+        time java -jar /app/$1/build/libs/app.jar
       else
+        cd $1
         gradle --project-cache-dir=/tmp/.gradle -g /tmp/.gradle --no-daemon jar -q > /dev/null 2>&1
+        time java -jar /tmp/build/libs/app.jar
       fi
-      time java -jar /tmp/build/libs/app.jar
     else
       time php $1/run.php
     fi
