@@ -1,7 +1,9 @@
 import java.io.File
 
 fun main() {
-    val input = File("input.txt").readLines().map {
+    val input = File("input.txt").readLines().filter {
+        !it.isEmpty()
+    }.map {
         it.split(" ")
     }.map {
         it[1] to it[7]
