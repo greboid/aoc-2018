@@ -1,4 +1,7 @@
 fun main() {
+    val input = File("input.txt").readLines().filter {
+        !it.isEmpty()
+    }
     val ms = measureTimeMillis {
         val answer 0
         println("Part 1: ${answer}")
