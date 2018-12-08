@@ -1,5 +1,6 @@
 import java.io.File
 import java.lang.Math.abs
+import java.lang.RuntimeException
 
 class Coord(val x: Int, val y: Int) {
     fun distance(x: Int, y: Int) = abs(this.x - x) + abs(this.y - y)
@@ -12,17 +13,17 @@ fun main() {
     }.map {
         Coord(it[0], it[1])
     }
-    val xMin = input.map{ it.x }.min()!!
-    val xMax = input.map{ it.x }.max()!!
-    val yMin = input.map{ it.y }.min()!!
-    val yMax = input.map{ it.y }.max()!!
+    val xMin = input.map{ it.x }.min() ?: throw RuntimeException("¯\\_(ツ)_/¯")
+    val xMax = input.map{ it.x }.max() ?: throw RuntimeException("¯\\_(ツ)_/¯")
+    val yMin = input.map{ it.y }.min() ?: throw RuntimeException("¯\\_(ツ)_/¯")
+    val yMax = input.map{ it.y }.max() ?: throw RuntimeException("¯\\_(ツ)_/¯")
 
     val infinites = mutableSetOf<Coord>()
     val areas = mutableMapOf<Coord, Int>()
     for (x in xMin..xMax) {
         for (y in yMin..yMax) {
-            val one = input.minBy { it.distance(x, y) }!!
-            val two = input.asReversed().minBy { it.distance(x, y) }!!
+            val one = input.minBy { it.distance(x, y) } ?: throw RuntimeException("¯\\_(ツ)_/¯")
+            val two = input.asReversed().minBy { it.distance(x, y) } ?: throw RuntimeException("¯\\_(ツ)_/¯")
             if (one != two) {
                 continue;
             }
