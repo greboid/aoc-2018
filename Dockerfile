@@ -1,7 +1,7 @@
 FROM greboid/kotlin
 COPY entrypoint.sh /entrypoint.sh
 WORKDIR /app
-RUN apk add --no-cache php7 php7-ctype bash && \
+RUN apk add --no-cache php7 php7-ctype bash rust cargo && \
     chmod +x /entrypoint.sh && \
     chown -R nobody:nobody /entrypoint.sh && \
     mkdir -p /tmp/.gradle && \
