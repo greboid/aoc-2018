@@ -10,10 +10,14 @@ class Coord(val x: Int, val y: Int) {
 }
 
 fun main() {
+    var ms1 = 0L
+    var ms2 = 0L
     val ms = measureTimeMillis {
-        part1()
-        part2()
+        ms1 = measureTimeMillis { part1() }
+        ms2 = measureTimeMillis { part2() }
     }
+    println("      : ${TimeUnit.MILLISECONDS.toMinutes(ms1)}m${TimeUnit.MILLISECONDS.toSeconds(ms1)}.${TimeUnit.MILLISECONDS.toMillis(ms1).toString().padStart(3, '0')}s")
+    println("      : ${TimeUnit.MILLISECONDS.toMinutes(ms2)}m${TimeUnit.MILLISECONDS.toSeconds(ms2)}.${TimeUnit.MILLISECONDS.toMillis(ms2).toString().padStart(3, '0')}s")
     println("      : ${TimeUnit.MILLISECONDS.toMinutes(ms)}m${TimeUnit.MILLISECONDS.toSeconds(ms)}.${TimeUnit.MILLISECONDS.toMillis(ms).toString().padStart(3, '0')}s")
 }
 
@@ -23,15 +27,17 @@ fun part2() {
     }.map {
         Coord(it[0], it[1])
     }
-    val xMin = input.map{ it.x }.min() ?: throw RuntimeException("¯\\_(ツ)_/¯")
-    val xMax = input.map{ it.x }.max() ?: throw RuntimeException("¯\\_(ツ)_/¯")
-    val yMin = input.map{ it.y }.min() ?: throw RuntimeException("¯\\_(ツ)_/¯")
-    val yMax = input.map{ it.y }.max() ?: throw RuntimeException("¯\\_(ツ)_/¯")
+    val inputCount = input.count()
+    val stupid = 10000
+    val xMin = (input.map{ it.x }.min() ?: throw RuntimeException("¯\\_(ツ)_/¯")) - (stupid/inputCount)
+    val xMax = (input.map{ it.x }.max() ?: throw RuntimeException("¯\\_(ツ)_/¯")) + (stupid/inputCount)
+    val yMin = (input.map{ it.y }.min() ?: throw RuntimeException("¯\\_(ツ)_/¯")) - (stupid/inputCount)
+    val yMax = (input.map{ it.y }.max() ?: throw RuntimeException("¯\\_(ツ)_/¯")) + (stupid/inputCount)
     val sum = (xMin until xMax).asSequence().flatMap { x ->
         (yMin until yMax).asSequence().map { y ->
             input.map { it.distance(x, y) }.sum()
         }
-    }.filter { it < 10000 }.count()
+    }.filter { it < stupid }.count()
 
     println("Part 2: ${sum}")
 }

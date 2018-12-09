@@ -23,8 +23,7 @@ echo 'Part 1: '.strlen($result)."\n";;
 
 $lengths = array();
 for($i = 65; $i < 91; $i++) {
-  $input = $result;
-  $test = str_replace([chr($i),chr($i+32)], '', $input);
+  $test = str_replace([chr($i),chr($i+32)], '', $result);
   $lengths[chr($i)] = strlen(react($test));
 }
 echo 'Part 2: '.min($lengths);
