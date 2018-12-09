@@ -16,7 +16,7 @@ if [ $# -eq 1 ]; then
   else
     if [ -f $1/src/main.rs ]; then
       cd $1/src
-      rustc --out-dir=/app/.build/$1/ main.rs > /dev/null 2>&1
+      rustc --out-dir=/app/.build/$1/ -C opt-level=3 -C debuginfo=0 main.rs > /dev/null 2>&1
       time /app/.build/$1/main
     elif [ -f $1/build.gradle ]; then
       if [ -w /app ]; then
