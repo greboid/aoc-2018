@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::HashSet;
 use std::fs::File; 
 use std::io; 
 use std::io::prelude::*; 
@@ -26,15 +26,17 @@ fn part_one(input: &Vec<i32>) -> io::Result<()> {
 }
 
 fn part_two(input: &Vec<i32>) -> io::Result<()> {
-    let mut seen = HashMap::with_capacity(2^18);
-    let mut freq = 0;
-    for i in (0..input.len()).cycle() {
-        freq += input[i];
-        if seen.contains_key(&freq) {
-            break;
-        }
-        seen.insert(freq, 1);
-    }
-    println!("Part 2: {}", freq);
+    let mut seen = HashSet::new();
+    let frequency = input
+        .iter()
+        .cycle()
+        .take(1000000)
+        .scan(0, |frequency, &change| {
+            *frequency += change;
+            Some(*frequency)
+        })
+        .find(|frequency| !seen.insert(*frequency))
+        .unwrap();
+    println!("Part 2: {}", frequency);
     Ok(())
 }
