@@ -76,7 +76,7 @@ class Vector(var x: Int, var y: Int, val dX: Int, val dY: Int) {
 
 fun main() {
     val ms = measureTimeMillis {
-        val input = File("10.txt").readLines().filter {
+        val input = File("input.txt").readLines().filter {
             !it.isEmpty()
         }.map {
             it.split(",", "<", ">")
