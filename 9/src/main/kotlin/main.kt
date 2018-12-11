@@ -9,9 +9,11 @@ class Marble(var value: Long) {
 
 class Board {
     private var current: Marble = Marble(0)
+    private var count = 1
 
     fun placeNext(value: Long): Long {
-        if (value % 23 == 0L) {
+        if (count == 23) {
+            count = 1
             repeat(7) {
                 current = current.previous
             }
@@ -21,6 +23,7 @@ class Board {
             current = current.next
             return score
         } else {
+            count++
             current = current.next
             val new = Marble(value)
             new.previous = current
