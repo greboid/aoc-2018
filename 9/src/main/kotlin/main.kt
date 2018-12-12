@@ -1,54 +1,30 @@
 import java.io.File
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.system.measureTimeMillis
 
-class Marble(var value: Long) {
-    var next: Marble = this
-    var previous: Marble = this
-}
+fun play(numPlayers: Int, lastMarblePoints: Int): Long {
+    val scores = LongArray(numPlayers)
+    val marbles = ArrayDeque<Int>().also { it.add(0) }
+    var count = 1
 
-class Board {
-    private var current: Marble = Marble(0)
-    private var count = 1
-
-    fun placeNext(value: Long): Long {
-        if (count == 23) {
-            count = 1
-            repeat(7) {
-                current = current.previous
+    (1..lastMarblePoints).forEach { marble ->
+        when (count) {
+            23 -> {
+                count = 0
+                repeat (7) {
+                    marbles.addLast(marbles.removeFirst())
+                }
+                scores[marble % numPlayers] += marble + marbles.removeFirst().toLong()
+                marbles.addFirst(marbles.removeLast())
             }
-            val score = current.value + value
-            current.previous.next = current.next
-            current.next.previous = current.previous
-            current = current.next
-            return score
-        } else {
-            count++
-            current = current.next
-            val new = Marble(value)
-            new.previous = current
-            new.next = current.next
-            current.next.previous = new
-            current.next = new
-            current = new
-            return 0
-        }
+            else -> {
+                marbles.addFirst(marbles.removeLast())
+                marbles.addFirst(marble)
+            }
+        }.also { count++ }
     }
-}
-
-class Game(private val numPlayers: Int, lastMarblePoints: Long) {
-    private val board = Board()
-    private val marbles = (1 until lastMarblePoints).asSequence()
-    private val scores = (0 until numPlayers).map { 0L }.toMutableList()
-    private var currentPlayer = 1
-
-    fun play(): List<Long> {
-        for (marble in marbles) {
-            scores[currentPlayer] += board.placeNext(marble)
-            currentPlayer = (currentPlayer + 1) % numPlayers
-        }
-        return scores
-    }
+    return scores.max() ?: 0L
 }
 
 fun main() {
@@ -58,10 +34,10 @@ fun main() {
         }.map {
             it.split(" ")
         }.map {
-            Pair(it[0].toInt(), it[6].toLong())
-        }[0]
-        println("Part 1\t: ${Game(input.first, input.second).play().max()}")
-        println("Part 2\t: ${Game(input.first, input.second * 100).play().max()}")
+            Pair(it[0].toInt(), it[6].toInt())
+        }.first()
+        println("Part 1\t: ${play(input.first, input.second)}")
+        println("Part 2\t: ${play(input.first, input.second*100)}")
     }
     println("Time\t: ${TimeUnit.MILLISECONDS.toMinutes(ms)}m${TimeUnit.MILLISECONDS.toSeconds(ms)}.${TimeUnit.MILLISECONDS.toMillis(ms).toString().padStart(3, '0')}s")
 }
