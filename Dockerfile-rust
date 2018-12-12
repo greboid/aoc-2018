@@ -1,0 +1,9 @@
+FROM rust
+COPY entrypoint.sh /entrypoint.sh
+WORKDIR /app
+RUN \
+    chmod +x /entrypoint.sh && \
+    chown -R nobody:nogroup /entrypoint.sh && \
+    chown -R nobody:nogroup /tmp
+USER nobody
+ENTRYPOINT ["/entrypoint.sh"]
