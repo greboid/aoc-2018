@@ -1,0 +1,7 @@
+[package]
+name = "aoc"
+version = "0.0.1"
+authors = ["Greg Holmes"]
+
+[dependencies]
+hashbrown = "0.1"
