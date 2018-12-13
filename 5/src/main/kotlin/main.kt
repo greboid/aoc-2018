@@ -1,15 +1,10 @@
 import java.io.File
 import java.util.*
-import java.util.concurrent.TimeUnit
-import kotlin.system.measureTimeMillis
 
 fun main() {
-    val ms = measureTimeMillis {
-        val input = File("input.txt").readLines().first()
-        println("Part 1\t: ${react(input).length}")
-        println("Part 2\t: ${fullyReact(input).length}")
-    }
-    println("Time\t: ${TimeUnit.MILLISECONDS.toMinutes(ms)}m${TimeUnit.MILLISECONDS.toSeconds(ms)}.${TimeUnit.MILLISECONDS.toMillis(ms).toString().padStart(3, '0')}s")
+    val input = File("input.txt").readLines().first()
+    println("Part 1\t: ${react(input).length}")
+    println("Part 2\t: ${fullyReact(input).length}")
 }
 
 fun react(input: String): String {
