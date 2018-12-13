@@ -14,7 +14,7 @@ if [ $# -ge 1 ]; then
     exit 1
   fi
 fi
-if [ $1 -eq 1 ]; then
+if [ -f $1/src/main.rs ]; then
   IMAGE=$RUSTIMAGE
 else
   IMAGE=$JAVAIMAGE
