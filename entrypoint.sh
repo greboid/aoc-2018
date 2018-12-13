@@ -14,11 +14,7 @@ if [ $# -eq 1 ]; then
   if [ $ANSWERS -eq 1 ]; then
     cat $1/answers.txt
   else
-    if [ -f $1/src/main.rs ]; then
-      cd $1/src
-      rustc --out-dir=/app/.build/$1/ -C opt-level=3 -C debuginfo=0 main.rs > /dev/null 2>&1
-      time /app/.build/$1/main
-    elif [ -f $1/build.gradle ]; then
+    if [ -f $1/build.gradle ]; then
       if [ -w /app ]; then
         cd $1
         gradle --project-cache-dir=/app/.build/$1 -g /app/.build/$1 --no-daemon jar -q > /dev/null 2>&1

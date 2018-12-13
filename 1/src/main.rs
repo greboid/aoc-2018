@@ -1,4 +1,6 @@
-use std::collections::HashSet;
+extern crate hashbrown;
+
+use hashbrown::HashSet;
 use std::fs::File; 
 use std::io; 
 use std::io::prelude::*; 
@@ -17,11 +19,7 @@ fn main() -> io::Result<()> {
 }
 
 fn part_one(input: &Vec<i32>) -> io::Result<()> {
-    let mut sum = 0;
-    for i in 0..input.len() {
-      sum += input[i];
-    }
-    println!("Part 1: {}", sum);
+    println!("Part 1: {}", input.iter().sum::<i32>());
     Ok(())
 }
 
@@ -30,7 +28,6 @@ fn part_two(input: &Vec<i32>) -> io::Result<()> {
     let frequency = input
         .iter()
         .cycle()
-        .take(1000000)
         .scan(0, |frequency, &change| {
             *frequency += change;
             Some(*frequency)
