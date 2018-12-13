@@ -12,6 +12,6 @@ else
   FILE=Dockerfile
 fi
 if [ "$(docker images -q $IMAGE)" == "" ]; then
-  docker build -f$FILE . -t $IMAGE
+  docker build -f$FILE . -t $IMAGE > /dev/null 2>&1
 fi
 docker run --rm -it -v $(pwd):/app $IMAGE $@
