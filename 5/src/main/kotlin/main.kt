@@ -15,7 +15,7 @@ fun main() {
 fun react(input: String): String {
     with(Stack<Char>()) {
         input.toCharArray().forEach {
-            if (!empty() && peek().isOppositeCase(it)) {
+            if (!empty() && peek().toInt().xor(it.toInt()) == 32) {
                 pop()
             } else {
                 push(it)
@@ -33,8 +33,4 @@ fun fullyReact(input: String): String {
     }.minBy {
         it.length
     } ?: ""
-}
-
-private fun Char.isOppositeCase(c: Char): Boolean {
-    return this != c && toLowerCase() == c.toLowerCase()
 }
