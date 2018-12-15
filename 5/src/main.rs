@@ -12,7 +12,7 @@ fn main() {
 }
 
 fn react(input: &str, skip: Option<char>) -> String {
-  let mut stack = Vec::<char>::with_capacity(2^18);
+  let mut stack = Vec::<char>::with_capacity(20000);
   for c in input.chars() {
     if skip.is_some() && (skip.unwrap() == c || reacts(c, skip.unwrap())) {
       //skip
