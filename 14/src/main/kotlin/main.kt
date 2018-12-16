@@ -3,7 +3,7 @@ import kotlin.system.measureTimeMillis
 
 fun main() {
     val ms = measureTimeMillis {
-        val input = File("14.txt").readLines().first()
+        val input = File("input.txt").readLines().first()
         println("Part 1: ${part1(input.toInt())}")
         println("Part 2: ${part2(input)}")
     }
