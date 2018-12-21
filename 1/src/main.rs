@@ -28,13 +28,14 @@ fn part_one(input: &Vec<i32>) -> i32 {
 fn part_two(input: &Vec<i32>) -> i32 {
     let mut seen = HashSet::with_capacity(200000);
     let mut sum = 0;
+    let mut check;
     loop {
         for n in input {
             sum += n;
-            if seen.contains(&sum) {
-                return sum;
+            check = seen.replace(sum);
+            if check != None {
+                return check.unwrap()
             }
-            seen.insert(sum);
         }
     }
 }
