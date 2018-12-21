@@ -27,7 +27,7 @@ fn part_two(input: &Vec<i32>) -> i32 {
         for n in input {
             sum += n;
             if seen.contains(&sum) {
-                println!("Part 1: {}", sum);
+                println!("Part 2: {}", sum);
                 return sum;
             }
             seen.insert(sum);
