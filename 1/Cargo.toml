@@ -5,3 +5,4 @@ authors = ["Greg Holmes"]
 
 [dependencies]
 hashbrown = "0.1"
+time = "0.1"
