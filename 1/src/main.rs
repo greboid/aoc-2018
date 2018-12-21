@@ -12,12 +12,12 @@ fn main() {
         .lines()
         .map(|e| e.unwrap().parse::<i32>().unwrap())
         .collect();
-    part_one(&numbers);
-    part_two(&numbers);
+    println!("Part 1: {}", part_one(&numbers));
+    println!("Part 2: {}", part_two(&numbers));
 }
 
-fn part_one(input: &Vec<i32>) {
-    println!("Part 1: {}", input.iter().sum::<i32>());
+fn part_one(input: &Vec<i32>) -> i32 {
+    input.iter().sum::<i32>()
 }
 
 fn part_two(input: &Vec<i32>) -> i32 {
@@ -27,11 +27,9 @@ fn part_two(input: &Vec<i32>) -> i32 {
         for n in input {
             sum += n;
             if seen.contains(&sum) {
-                println!("Part 2: {}", sum);
                 return sum;
             }
             seen.insert(sum);
         }
     }
 }
-
